@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshBasket - Online Grocery Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <img src="logo.png" alt="FreshBasket Logo" class="logo">
+                </div>
+                <div class="location">
+                    <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <div class="location-text">
+                        <span class="deliver-to">Deliver to</span>
+                        <span class="location-name">India</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <select class="search-category">
+                        <option>All</option>
+                        <option>Fruits & Vegetables</option>
+                        <option>Dairy & Bakery</option>
+                        <option>Meat & Seafood</option>
+                        <option>Pantry</option>
+                        <option>Beverages</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="account">
+                    <a href="login.html" class="account-line1">Hello, Sign in</a>
+                    <span class="account-line2">Account & Lists</span>
+                </div>
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-bottom">
+            <div class="nav-bottom-left">
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                    <span>All Categories</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">Deals</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Seasonal Offers</a>
+                    <a href="#">Recipes</a>
+                    <a href="#">My Lists</a>
+                </div>
+            </div>
+            <div class="nav-bottom-right">
+                <a href="#">Free delivery on orders over ₹380+</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Moving Banner Section -->
+    <section class="moving-banner-container">
+        <div class="moving-banner">
+            <div class="banner-content">
+                <span class="banner-text">🥬 Fresh Vegetables - Up to 20% OFF!</span>
+                <span class="banner-text">🍎 Organic Fruits - Free Delivery!</span>
+                <span class="banner-text">🥛 Dairy Products - Buy 1 Get 1 Free!</span>
+                <span class="banner-text">🍞 Bakery Items - Daily Fresh!</span>
+                <span class="banner-text">🥩 Premium Meat - Quality Guaranteed!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section with Banner Carousel -->
+    <section class="hero-banner">
+        <div class="banner-carousel">
+            <div class="banner-slide active" style="background-image: url('bvegetable.jpg')">
+                <div class="banner-overlay">
+                    <div class="hero-content">
+                        <h1>Fresh Vegetables Delivered Daily</h1>
+                        <p>Organic, farm-fresh vegetables at your doorstep</p>
+                        <button class="hero-button">Shop Vegetables</button>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-slide" style="background-image: url('bcloths.jpg')">
+                <div class="banner-overlay">
+                    <div class="hero-content">
+                        <h1>Quality Clothing & Essentials</h1>
+                        <p>Discover our curated collection of premium clothing</p>
+                        <button class="hero-button">Shop Clothing</button>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-slide" style="background-image: url('bdairy.jpg')">
+                <div class="banner-overlay">
+                    <div class="hero-content">
+                        <h1>Fresh Dairy Products</h1>
+                        <p>Pure, fresh dairy delivered from local farms</p>
+                        <button class="hero-button">Shop Dairy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-slide" style="background-image: url('bstationary.jpg')">
+                <div class="banner-overlay">
+                    <div class="hero-content">
+                        <h1>Office & School Supplies</h1>
+                        <p>Everything you need for work and study</p>
+                        <button class="hero-button">Shop Stationery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="banner-nav prev" onclick="changeBanner(-1)">&#10094;</button>
+        <button class="banner-nav next" onclick="changeBanner(1)">&#10095;</button>
+        <div class="banner-dots">
+            <span class="dot active" onclick="currentBanner(1)"></span>
+            <span class="dot" onclick="currentBanner(2)"></span>
+            <span class="dot" onclick="currentBanner(3)"></span>
+            <span class="dot" onclick="currentBanner(4)"></span>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Fruits" alt="Fruits">
+                <p>Fresh Fruits</p>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Vegetables" alt="Vegetables">
+                <p>Vegetables</p>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Dairy" alt="Dairy">
+                <p>Dairy & Eggs</p>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Bakery" alt="Bakery">
+                <p>Bakery</p>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Meat" alt="Meat">
+                <p>Meat & Seafood</p>
+            </div>
+            <div class="category-card">
+                <img src="https://via.placeholder.com/300x200?text=Pantry" alt="Pantry">
+                <p>Pantry Staples</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card" data-id="1">
+                <img src="https://via.placeholder.com/300x300?text=Organic+Apples" alt="Organic Apples">
+                <div class="product-info">
+                    <h3>Organic Apples</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="2">
+                <img src="https://via.placeholder.com/300x300?text=Bananas" alt="Bananas">
+                <div class="product-info">
+                    <h3>Bananas (Organic)</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="3">
+                <img src="https://via.placeholder.com/300x300?text=Carrots" alt="Carrots">
+                <div class="product-info">
+                    <h3>Fresh Carrots</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="4">
+                <img src="https://via.placeholder.com/300x300?text=Spinach" alt="Spinach">
+                <div class="product-info">
+                    <h3>Organic Spinach</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="5">
+                <img src="https://via.placeholder.com/300x300?text=Milk" alt="Milk">
+                <div class="product-info">
+                    <h3>Whole Milk</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="6">
+                <img src="https://via.placeholder.com/300x300?text=Bread" alt="Bread">
+                <div class="product-info">
+                    <h3>Whole Wheat Bread</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="7">
+                <img src="https://via.placeholder.com/300x300?text=Chicken" alt="Chicken">
+                <div class="product-info">
+                    <h3>Chicken Breast</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="8">
+                <img src="https://via.placeholder.com/300x300?text=Salmon" alt="Salmon">
+                <div class="product-info">
+                    <h3>Atlantic Salmon</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Deals -->
+    <section class="deals">
+        <h2>Weekly Deals</h2>
+        <div class="deal-grid">
+            <div class="deal-card">
+                <img src="https://via.placeholder.com/300x200?text=20%+Off" alt="Deal">
+                <div class="deal-info">
+                    <h3>20% Off All Fruits</h3>
+                    <p class="deal-description">Fresh and organic fruits at discounted prices</p>
+                    <p class="deal-expiry">Offer ends in 3 days</p>
+                </div>
+            </div>
+            <div class="deal-card">
+                <img src="https://via.placeholder.com/300x200?text=Buy+1+Get+1" alt="Deal">
+                <div class="deal-info">
+                    <h3>Buy 1 Get 1 Free</h3>
+                    <p class="deal-description">On all bakery items</p>
+                    <p class="deal-expiry">Offer ends in 5 days</p>
+                </div>
+            </div>
+            <div class="deal-card">
+                <img src="https://via.placeholder.com/300x200?text=$5+Off" alt="Deal">
+                <div class="deal-info">
+                    <h3>₹50 Off Orders ₹375+</h3>
+                    <p class="deal-description">Free delivery on orders over ₹330</p>
+                    <p class="deal-expiry">Offer ends in 7 days</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About FreshBasket</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FreshBasket Cares</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                    <li><a href="#">Manage Devices</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell products on FreshBasket</a></li>
+                    <li><a href="#">Become a Delivery Partner</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Payment Products</h3>
+                <ul>
+                    <li><a href="#">FreshBasket Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">FreshBasket Currency Converter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

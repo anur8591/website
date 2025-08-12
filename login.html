@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FreshBasket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <select class="search-category">
+                        <option>All</option>
+                        <option>Fruits & Vegetables</option>
+                        <option>Dairy & Bakery</option>
+                        <option>Meat & Seafood</option>
+                        <option>Pantry</option>
+                        <option>Beverages</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <form id="loginForm" class="login-form">
+            <h2>Sign in to FreshBasket</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn-primary">Sign In</button>
+            <p class="login-message" id="loginMessage"></p>
+            <div class="login-options">
+                <a href="#" class="forgot-password">Forgot your password?</a>
+                <p class="signup-link">New to FreshBasket? <a href="signup.html">Create an account</a></p>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About FreshBasket</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FreshBasket Cares</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                    <li><a href="#">Manage Devices</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell products on FreshBasket</a></li>
+                    <li><a href="#">Become a Delivery Partner</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Payment Products</h3>
+                <ul>
+                    <li><a href="#">FreshBasket Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">FreshBasket Currency Converter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update cart count on page load
+        function updateCartCount() {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                let count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
+                document.querySelector('.cart-count').textContent = count;
+            } catch (e) {
+                console.error('Error updating cart count:', e);
+                document.querySelector('.cart-count').textContent = '0';
+            }
+        }
+
+        updateCartCount();
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.email.value.trim();
+            const password = this.password.value.trim();
+            const messageEl = document.getElementById('loginMessage');
+            
+            if (email === '' || password === '') {
+                messageEl.textContent = 'Please fill in all fields.';
+                messageEl.style.color = 'red';
+                return;
+            }
+            
+            // Simple validation example
+            if (!email.includes('@')) {
+                messageEl.textContent = 'Please enter a valid email.';
+                messageEl.style.color = 'red';
+                return;
+            }
+            
+            if (password.length < 6) {
+                messageEl.textContent = 'Password must be at least 6 characters.';
+                messageEl.style.color = 'red';
+                return;
+            }
+            
+            // Simulate successful login
+            messageEl.textContent = 'Login successful! Redirecting...';
+            messageEl.style.color = '#4CAF50';
+            
+            // Redirect to homepage after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

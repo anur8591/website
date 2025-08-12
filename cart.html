@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - FreshBasket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <select class="search-category">
+                        <option>All</option>
+                        <option>Fruits & Vegetables</option>
+                        <option>Dairy & Bakery</option>
+                        <option>Meat & Seafood</option>
+                        <option>Pantry</option>
+                        <option>Beverages</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div class="cart-content">
+            <div class="cart-items">
+                <div id="cart-items-container">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Delivery:</span>
+                        <span id="delivery">FREE</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tax:</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-item total">
+                        <strong>Total:</strong>
+                        <strong id="total">$0.00</strong>
+                    </div>
+                    <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About FreshBasket</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FreshBasket Cares</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                    <li><a href="#">Manage Devices</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell products on FreshBasket</a></li>
+                    <li><a href="#">Become a Delivery Partner</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Payment Products</h3>
+                <ul>
+                    <li><a href="#">FreshBasket Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">FreshBasket Currency Converter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update cart count on page load
+        function updateCartCount() {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                let count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
+                document.querySelector('.cart-count').textContent = count;
+                return count;
+            } catch (e) {
+                console.error('Error updating cart count:', e);
+                document.querySelector('.cart-count').textContent = '0';
+                return 0;
+            }
+        }
+
+        // Display cart items
+        function displayCartItems() {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                const container = document.getElementById('cart-items-container');
+                const subtotalElement = document.getElementById('subtotal');
+                const taxElement = document.getElementById('tax');
+                const totalElement = document.getElementById('total');
+                const checkoutBtn = document.getElementById('checkout-btn');
+                
+                if (Object.keys(cart).length === 0) {
+                    container.innerHTML = '<p>Your cart is empty. <a href="index.html">Continue shopping</a></p>';
+                    subtotalElement.textContent = '$0.00';
+                    taxElement.textContent = '$0.00';
+                    totalElement.textContent = '$0.00';
+                    checkoutBtn.disabled = true;
+                    return;
+                }
+                
+                let subtotal = 0;
+                let html = '';
+                
+                for (const productId in cart) {
+                    const item = cart[productId];
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    html += `
+                    <div class="cart-item" data-id="${productId}">
+                        <div class="item-image">
+                            <img src="https://via.placeholder.com/100x100?text=${encodeURIComponent(item.name)}" alt="${item.name}">
+                        </div>
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p class="item-price">$${item.price.toFixed(2)}/lb</p>
+                        </div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn minus" data-id="${productId}">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn plus" data-id="${productId}">+</button>
+                        </div>
+                        <div class="item-total">
+                            <span>$${itemTotal.toFixed(2)}</span>
+                        </div>
+                        <div class="item-remove">
+                            <button class="remove-btn" data-id="${productId}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    `;
+                }
+                
+                container.innerHTML = html;
+                
+                // Calculate tax (10% for example)
+                const tax = subtotal * 0.1;
+                const total = subtotal + tax;
+                
+                subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+                taxElement.textContent = `$${tax.toFixed(2)}`;
+                totalElement.textContent = `$${total.toFixed(2)}`;
+                
+                // Add event listeners to buttons
+                document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        updateQuantity(id, -1);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        updateQuantity(id, 1);
+                    });
+                });
+                
+                document.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        removeFromCart(id);
+                    });
+                });
+                
+                checkoutBtn.disabled = false;
+            } catch (e) {
+                console.error('Error displaying cart items:', e);
+                container.innerHTML = '<p>Error loading cart items. Please try again.</p>';
+            }
+        }
+
+        // Update item quantity
+        function updateQuantity(productId, change) {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                if (cart[productId]) {
+                    cart[productId].quantity += change;
+                    if (cart[productId].quantity <= 0) {
+                        delete cart[productId];
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    displayCartItems();
+                    updateCartCount();
+                }
+            } catch (e) {
+                console.error('Error updating quantity:', e);
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                delete cart[productId];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCartItems();
+                updateCartCount();
+            } catch (e) {
+                console.error('Error removing item:', e);
+            }
+        }
+
+        // Checkout button event listener
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            alert('Proceeding to checkout!');
+            // In a real application, this would redirect to a checkout page
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            displayCartItems();
+        });
+    </script>
+</body>
+</html>

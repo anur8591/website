@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - FreshBasket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <select class="search-category">
+                        <option>All</option>
+                        <option>Fruits & Vegetables</option>
+                        <option>Dairy & Bakery</option>
+                        <option>Meat & Seafood</option>
+                        <option>Pantry</option>
+                        <option>Beverages</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Detail Section -->
+    <main class="product-detail-container">
+        <div class="product-image">
+            <img id="product-image" src="" alt="Product Image">
+        </div>
+        <div class="product-info">
+            <h1 id="product-name"></h1>
+            <div class="product-rating">
+                <span class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </span>
+                <span class="rating-count">(128 ratings)</span>
+            </div>
+            <p id="product-description"></p>
+            <p class="product-price" id="product-price"></p>
+            <div class="product-meta">
+                <p><strong>Category:</strong> <span id="product-category"></span></p>
+                <p><strong>Origin:</strong> <span id="product-origin"></span></p>
+                <p><strong>Shelf Life:</strong> <span id="product-shelf-life"></span></p>
+            </div>
+            <div class="quantity-selector">
+                <label for="quantity">Quantity:</label>
+                <select id="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <button id="add-to-cart-btn" class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+    </main>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <h2>Related Products</h2>
+        <div class="product-grid">
+            <div class="product-card" data-id="9">
+                <img src="https://via.placeholder.com/300x300?text=Oranges" alt="Oranges">
+                <div class="product-info">
+                    <h3>Organic Oranges</h3>
+                    <p class="product-price">$3.49/lb</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="10">
+                <img src="https://via.placeholder.com/300x300?text=Grapes" alt="Grapes">
+                <div class="product-info">
+                    <h3>Red Grapes</h3>
+                    <p class="product-price">$4.99/lb</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="11">
+                <img src="https://via.placeholder.com/300x300?text=Berries" alt="Berries">
+                <div class="product-info">
+                    <h3>Mixed Berries</h3>
+                    <p class="product-price">$5.99/box</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="12">
+                <img src="https://via.placeholder.com/300x300?text=Kiwi" alt="Kiwi">
+                <div class="product-info">
+                    <h3>Kiwi Fruit</h3>
+                    <p class="product-price">$1.99/each</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About FreshBasket</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FreshBasket Cares</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                    <li><a href="#">Manage Devices</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell products on FreshBasket</a></li>
+                    <li><a href="#">Become a Delivery Partner</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Payment Products</h3>
+                <ul>
+                    <li><a href="#">FreshBasket Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">FreshBasket Currency Converter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = {
+            1: {
+                name: "Organic Apples",
+                description: "Crisp and juicy organic apples, perfect for snacking and cooking. Grown without synthetic pesticides or fertilizers. Rich in fiber and vitamin C.",
+                price: 2.99,
+                image: "https://via.placeholder.com/500x500?text=Organic+Apples",
+                category: "Fruits",
+                origin: "Washington, USA",
+                shelfLife: "7-10 days when stored properly"
+            },
+            2: {
+                name: "Bananas (Organic)",
+                description: "Sweet and ripe organic bananas, great for smoothies and snacks. Rich in potassium and vitamin B6. Fair trade certified.",
+                price: 0.99,
+                image: "https://via.placeholder.com/500x500?text=Organic+Bananas",
+                category: "Fruits",
+                origin: "Ecuador",
+                shelfLife: "5-7 days at room temperature"
+            },
+            3: {
+                name: "Fresh Carrots",
+                description: "Crunchy fresh carrots, ideal for salads and cooking. High in beta-carotene and fiber. Locally sourced and pesticide-free.",
+                price: 1.49,
+                image: "https://via.placeholder.com/500x500?text=Fresh+Carrots",
+                category: "Vegetables",
+                origin: "California, USA",
+                shelfLife: "2-3 weeks when stored in refrigerator"
+            },
+            4: {
+                name: "Organic Spinach",
+                description: "Fresh organic spinach, packed with nutrients and flavor. Rich in iron, folate, and vitamin K. Perfect for salads and cooking.",
+                price: 3.49,
+                image: "https://via.placeholder.com/500x500?text=Organic+Spinach",
+                category: "Vegetables",
+                origin: "Oregon, USA",
+                shelfLife: "5-7 days when stored properly"
+            },
+            5: {
+                name: "Whole Milk",
+                description: "Fresh whole milk from grass-fed cows. Rich in calcium and vitamin D. No artificial hormones or antibiotics.",
+                price: 3.99,
+                image: "https://via.placeholder.com/500x500?text=Whole+Milk",
+                category: "Dairy",
+                origin: "Local Dairy Farm",
+                shelfLife: "7-10 days when refrigerated"
+            },
+            6: {
+                name: "Whole Wheat Bread",
+                description: "Freshly baked whole wheat bread. Made with organic flour and natural ingredients. Good source of fiber and protein.",
+                price: 2.99,
+                image: "https://via.placeholder.com/500x500?text=Whole+Wheat+Bread",
+                category: "Bakery",
+                origin: "Local Bakery",
+                shelfLife: "5-7 days at room temperature"
+            },
+            7: {
+                name: "Chicken Breast",
+                description: "Fresh chicken breast, skinless and boneless. High in protein and low in fat. Raised without antibiotics or hormones.",
+                price: 5.99,
+                image: "https://via.placeholder.com/500x500?text=Chicken+Breast",
+                category: "Meat",
+                origin: "Local Farm",
+                shelfLife: "1-2 days when refrigerated"
+            },
+            8: {
+                name: "Atlantic Salmon",
+                description: "Fresh Atlantic salmon, rich in omega-3 fatty acids. Sustainably sourced and packed with protein. Perfect for grilling or baking.",
+                price: 12.99,
+                image: "https://via.placeholder.com/500x500?text=Atlantic+Salmon",
+                category: "Seafood",
+                origin: "Norway",
+                shelfLife: "1-2 days when refrigerated"
+            }
+        };
+
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id') || '1';
+
+        // Load product details
+        const product = products[productId];
+        if (product) {
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}/lb`;
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-image').alt = product.name;
+            document.getElementById('product-category').textContent = product.category;
+            document.getElementById('product-origin').textContent = product.origin;
+            document.getElementById('product-shelf-life').textContent = product.shelfLife;
+        } else {
+            document.querySelector('main').innerHTML = '<p>Product not found.</p>';
+        }
+
+        // Add to cart functionality
+        document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+            try {
+                const quantity = parseInt(document.getElementById('quantity').value);
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                
+                if (cart[productId]) {
+                    cart[productId].quantity += quantity;
+                } else {
+                    cart[productId] = {
+                        name: product.name,
+                        price: product.price,
+                        quantity: quantity
+                    };
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${quantity} ${product.name} added to cart!`);
+                updateCartCount();
+            } catch (e) {
+                console.error('Error adding to cart:', e);
+                alert('Error adding to cart. Please try again.');
+            }
+        });
+
+        // Update cart count in header
+        function updateCartCount() {
+            try {
+                let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                let count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
+                document.querySelector('.cart-count').textContent = count;
+            } catch (e) {
+                console.error('Error updating cart count:', e);
+                document.querySelector('.cart-count').textContent = '0';
+            }
+        }
+
+        // Update cart count when page loads
+        updateCartCount();
+
+        // Add to cart functionality for related products
+        document.querySelectorAll('.related-products .add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const relatedProductId = productCard.dataset.id;
+                
+                if (relatedProductId) {
+                    try {
+                        // Get product info from DOM
+                        const productNameElement = productCard.querySelector('h3');
+                        const productPriceElement = productCard.querySelector('.product-price');
+                        
+                        const productName = productNameElement ? productNameElement.textContent : 'Unknown Product';
+                        const productPriceText = productPriceElement ? productPriceElement.textContent : '$0.00';
+                        const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g,"")) || 0;
+                        
+                        // Update cart in localStorage
+                        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                        if (cart[relatedProductId]) {
+                            cart[relatedProductId].quantity += 1;
+                        } else {
+                            cart[relatedProductId] = {
+                                name: productName,
+                                price: productPrice,
+                                quantity: 1
+                            };
+                        }
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        
+                        // Update cart count display
+                        updateCartCount();
+                        
+                        // Visual feedback
+                        const originalText = button.textContent;
+                        button.textContent = "Added!";
+                        button.style.backgroundColor = "#48a148";
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.style.backgroundColor = "#ffd814";
+                        }, 1000);
+                        
+                        console.log("Related product added to cart");
+                    } catch (e) {
+                        console.error('Error adding related product to cart:', e);
+                        alert('Error adding to cart. Please try again.');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
