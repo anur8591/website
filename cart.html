@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - FreshBasket</title>
+    <title>Cart - FreshBasket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <div class="navbar">
             <div class="nav-left">
                 <div class="logo-container">
                     <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
+                </div>
+                <div class="location">
+                    <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <div class="location-text">
+                        <span class="deliver-to">Deliver to</span>
+                        <span class="location-name">India</span>
+                    </div>
                 </div>
             </div>
             
@@ -32,6 +40,10 @@
             </div>
             
             <div class="nav-right">
+                <div class="account">
+                    <a href="login.html" class="account-line1">Hello, Sign in</a>
+                    <span class="account-line2">Account & Lists</span>
+                </div>
                 <div class="cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -39,39 +51,44 @@
                 </div>
             </div>
         </div>
-    </header>
-
-    <main class="cart-container">
-        <h1>Your Shopping Cart</h1>
-        <div class="cart-content">
-            <div class="cart-items">
-                <div id="cart-items-container">
-                    <!-- Cart items will be dynamically inserted here -->
+        
+        <div class="nav-bottom">
+            <div class="nav-bottom-left">
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                    <span>All Categories</span>
                 </div>
-                <div class="cart-summary">
-                    <h3>Order Summary</h3>
-                    <div class="summary-item">
-                        <span>Subtotal:</span>
-                        <span id="subtotal">$0.00</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Delivery:</span>
-                        <span id="delivery">FREE</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Tax:</span>
-                        <span id="tax">$0.00</span>
-                    </div>
-                    <div class="summary-item total">
-                        <strong>Total:</strong>
-                        <strong id="total">$0.00</strong>
-                    </div>
-                    <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="wishlist.html">Wishlist</a>
+                    <a href="#">Deals</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Seasonal Offers</a>
+                    <a href="#">Recipes</a>
+                    <a href="#">My Lists</a>
                 </div>
             </div>
+            <div class="nav-bottom-right">
+                <a href="#">Free delivery on orders over ₹380+</a>
+            </div>
         </div>
-    </main>
+    </header>
 
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <h1>Your Cart</h1>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be populated here -->
+        </div>
+        <div id="cart-total" class="cart-total">
+            <!-- Total will be displayed here -->
+        </div>
+        <div class="cart-actions">
+            <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-top">
             <div class="footer-links">
@@ -121,153 +138,72 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script>
-        // Update cart count on page load
-        function updateCartCount() {
-            try {
-                let cart = JSON.parse(localStorage.getItem('cart')) || {};
-                let count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
-                document.querySelector('.cart-count').textContent = count;
-                return count;
-            } catch (e) {
-                console.error('Error updating cart count:', e);
-                document.querySelector('.cart-count').textContent = '0';
-                return 0;
-            }
-        }
-
-        // Display cart items
-        function displayCartItems() {
-            try {
-                let cart = JSON.parse(localStorage.getItem('cart')) || {};
-                const container = document.getElementById('cart-items-container');
-                const subtotalElement = document.getElementById('subtotal');
-                const taxElement = document.getElementById('tax');
-                const totalElement = document.getElementById('total');
-                const checkoutBtn = document.getElementById('checkout-btn');
-                
-                if (Object.keys(cart).length === 0) {
-                    container.innerHTML = '<p>Your cart is empty. <a href="index.html">Continue shopping</a></p>';
-                    subtotalElement.textContent = '$0.00';
-                    taxElement.textContent = '$0.00';
-                    totalElement.textContent = '$0.00';
-                    checkoutBtn.disabled = true;
-                    return;
-                }
-                
-                let subtotal = 0;
-                let html = '';
-                
-                for (const productId in cart) {
-                    const item = cart[productId];
-                    const itemTotal = item.price * item.quantity;
-                    subtotal += itemTotal;
-                    
-                    html += `
-                    <div class="cart-item" data-id="${productId}">
-                        <div class="item-image">
-                            <img src="https://via.placeholder.com/100x100?text=${encodeURIComponent(item.name)}" alt="${item.name}">
-                        </div>
-                        <div class="item-details">
-                            <h3>${item.name}</h3>
-                            <p class="item-price">$${item.price.toFixed(2)}/lb</p>
-                        </div>
-                        <div class="item-quantity">
-                            <button class="quantity-btn minus" data-id="${productId}">-</button>
-                            <span class="quantity">${item.quantity}</span>
-                            <button class="quantity-btn plus" data-id="${productId}">+</button>
-                        </div>
-                        <div class="item-total">
-                            <span>$${itemTotal.toFixed(2)}</span>
-                        </div>
-                        <div class="item-remove">
-                            <button class="remove-btn" data-id="${productId}"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    `;
-                }
-                
-                container.innerHTML = html;
-                
-                // Calculate tax (10% for example)
-                const tax = subtotal * 0.1;
-                const total = subtotal + tax;
-                
-                subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-                taxElement.textContent = `$${tax.toFixed(2)}`;
-                totalElement.textContent = `$${total.toFixed(2)}`;
-                
-                // Add event listeners to buttons
-                document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        updateQuantity(id, -1);
-                    });
-                });
-                
-                document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        updateQuantity(id, 1);
-                    });
-                });
-                
-                document.querySelectorAll('.remove-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        removeFromCart(id);
-                    });
-                });
-                
-                checkoutBtn.disabled = false;
-            } catch (e) {
-                console.error('Error displaying cart items:', e);
-                container.innerHTML = '<p>Error loading cart items. Please try again.</p>';
-            }
-        }
-
-        // Update item quantity
-        function updateQuantity(productId, change) {
-            try {
-                let cart = JSON.parse(localStorage.getItem('cart')) || {};
-                if (cart[productId]) {
-                    cart[productId].quantity += change;
-                    if (cart[productId].quantity <= 0) {
-                        delete cart[productId];
-                    }
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    displayCartItems();
-                    updateCartCount();
-                }
-            } catch (e) {
-                console.error('Error updating quantity:', e);
-            }
-        }
-
-        // Remove item from cart
-        function removeFromCart(productId) {
-            try {
-                let cart = JSON.parse(localStorage.getItem('cart')) || {};
-                delete cart[productId];
-                localStorage.setItem('cart', JSON.stringify(cart));
-                displayCartItems();
-                updateCartCount();
-            } catch (e) {
-                console.error('Error removing item:', e);
-            }
-        }
-
-        // Checkout button event listener
-        document.getElementById('checkout-btn').addEventListener('click', function() {
-            alert('Proceeding to checkout!');
-            // In a real application, this would redirect to a checkout page
-        });
-
-        // Initialize page
+        // Load cart items on page load
         document.addEventListener('DOMContentLoaded', function() {
-            updateCartCount();
-            displayCartItems();
+            loadCartItems();
         });
+
+        function loadCartItems() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            let total = 0;
+
+            cartItemsContainer.innerHTML = '';
+
+            if (Object.keys(cart).length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotalContainer.innerHTML = '';
+                return;
+            }
+
+            for (const [id, item] of Object.entries(cart)) {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <img src="https://via.placeholder.com/100x100?text=${item.name.replace(/\s+/g, '+')}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price}</p>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity('${id}', ${item.quantity - 1})">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity('${id}', ${item.quantity + 1})">+</button>
+                        </div>
+                        <p>Total: ₹${itemTotal}</p>
+                        <button onclick="removeFromCart('${id}')" class="remove-btn">Remove</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            }
+
+            cartTotalContainer.innerHTML = `<h2>Total: ₹${total}</h2>`;
+        }
+
+        function updateQuantity(id, newQuantity) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            if (newQuantity <= 0) {
+                delete cart[id];
+            } else {
+                cart[id].quantity = newQuantity;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCartItems();
+            updateCartCount();
+        }
+
+        function removeFromCart(id) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            delete cart[id];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCartItems();
+            updateCartCount();
+        }
     </script>
 </body>
 </html>

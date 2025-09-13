@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegetables - FreshBasket</title>
+    <title>Wishlist - FreshBasket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -60,6 +60,7 @@
                 </div>
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="cart.html">Cart</a>
                     <a href="#">Deals</a>
                     <a href="#">New Arrivals</a>
                     <a href="#">Seasonal Offers</a>
@@ -73,72 +74,11 @@
         </div>
     </header>
 
-    <!-- Category Banner -->
-    <section class="category-banner" style="background-image: url('Cvegetable.jpg')">
-        <div class="category-banner-content">
-            <h1>Fresh Vegetables</h1>
-            <p>Organic, farm-fresh vegetables delivered daily</p>
-        </div>
-    </section>
-
-    <!-- Vegetable Products -->
-    <section class="products">
-        <h2>Vegetables</h2>
-        <div class="product-grid">
-            <div class="product-card" data-id="3">
-                <img src="images/vegetables/fresh_carrots.jpg" alt="Fresh Carrots">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Fresh Carrots</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="4">
-                <img src="images/vegetables/organic_spinach.jpg" alt="Organic Spinach">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Organic Spinach</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="13">
-                <img src="images/vegetables/broccoli.jpg" alt="Broccoli">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Broccoli</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="14">
-                <img src="images/vegetables/tomatoes.jpg" alt="Tomatoes">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Tomatoes</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="15">
-                <img src="images/vegetables/cucumbers.jpg" alt="Cucumbers">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Cucumbers</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="16">
-                <img src="images/vegetables/bell_peppers.jpg" alt="Bell Peppers">
-                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
-                <div class="product-info">
-                    <h3>Bell Peppers</h3>
-                    <p class="product-price">₹999/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
+    <!-- Wishlist Section -->
+    <section class="wishlist-section">
+        <h1>Your Wishlist</h1>
+        <div id="wishlist-items" class="wishlist-items">
+            <!-- Wishlist items will be populated here -->
         </div>
     </section>
 
@@ -193,5 +133,66 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Load wishlist items on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWishlistItems();
+        });
+
+        function loadWishlistItems() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const wishlistItemsContainer = document.getElementById('wishlist-items');
+
+            wishlistItemsContainer.innerHTML = '';
+
+            if (wishlist.length === 0) {
+                wishlistItemsContainer.innerHTML = '<p>Your wishlist is empty.</p>';
+                return;
+            }
+
+            wishlist.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'wishlist-item';
+                itemElement.innerHTML = `
+                    <img src="https://via.placeholder.com/100x100?text=${item.name.replace(/\s+/g, '+')}" alt="${item.name}">
+                    <div class="wishlist-item-info">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price}</p>
+                        <div class="wishlist-actions">
+                            <button onclick="addToCartFromWishlist(${index})" class="add-to-cart-btn">Add to Cart</button>
+                            <button onclick="removeFromWishlist(${index})" class="remove-btn">Remove</button>
+                        </div>
+                    </div>
+                `;
+                wishlistItemsContainer.appendChild(itemElement);
+            });
+        }
+
+        function addToCartFromWishlist(index) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const item = wishlist[index];
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+            if (cart[item.id]) {
+                cart[item.id].quantity += 1;
+            } else {
+                cart[item.id] = {
+                    name: item.name,
+                    price: item.price,
+                    quantity: 1
+                };
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Item added to cart!');
+        }
+
+        function removeFromWishlist(index) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlistItems();
+        }
+    </script>
 </body>
 </html>

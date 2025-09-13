@@ -44,11 +44,11 @@
                     <a href="login.html" class="account-line1">Hello, Sign in</a>
                     <span class="account-line2">Account & Lists</span>
                 </div>
-                <div class="cart">
+                <a href="cart.html" class="cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                     <span class="cart-text">Cart</span>
-                </div>
+                </a>
             </div>
         </div>
         
@@ -59,6 +59,8 @@
                     <span>All Categories</span>
                 </div>
                 <div class="nav-links">
+                    <a href="cart.html">Cart</a>
+                    <a href="wishlist.html">Wishlist</a>
                     <a href="#">Deals</a>
                     <a href="#">New Arrivals</a>
                     <a href="#">Seasonal Offers</a>
@@ -139,30 +141,42 @@
     <section class="categories">
         <h2>Shop by Category</h2>
         <div class="category-grid">
-            <div class="category-card">
-                <img src="Cfruits.jpg" alt="Fruits">
-                <p>Fresh Fruits</p>
-            </div>
-            <div class="category-card">
-                <img src="Cvegetable.jpg" alt="Vegetables">
-                <p>Vegetables</p>
-            </div>
-            <div class="category-card">
-                <img src="Cdairy.jpg" alt="Dairy">
-                <p>Dairy & Eggs</p>
-            </div>
-            <div class="category-card">
-                <img src="Cbakery.jpg" alt="Bakery">
-                <p>Bakery</p>
-            </div>
-            <div class="category-card">
-                <img src="Cmeat.jpg" alt="Meat">
-                <p>Meat & Seafood</p>
-            </div>
-            <div class="category-card">
-                <img src="Cpantry.jpg" alt="Pantry">
-                <p>Pantry Staples</p>
-            </div>
+            <a href="fruits.html">
+                <div class="category-card">
+                    <img src="Cfruits.jpg" alt="Fruits">
+                    <p>Fresh Fruits</p>
+                </div>
+            </a>
+            <a href="vegetable.html">
+                <div class="category-card">
+                    <img src="Cvegetable.jpg" alt="Vegetables">
+                    <p>Vegetables</p>
+                </div>
+            </a>
+            <a href="dairy.html">
+                <div class="category-card">
+                    <img src="Cdairy.jpg" alt="Dairy">
+                    <p>Dairy & Eggs</p>
+                </div>
+            </a>
+            <a href="bakery.html">
+                <div class="category-card">
+                    <img src="Cbakery.jpg" alt="Bakery">
+                    <p>Bakery</p>
+                </div>
+            </a>
+            <a href="meat.html">
+                <div class="category-card">
+                    <img src="Cmeat.jpg" alt="Meat">
+                    <p>Meat & Seafood</p>
+                </div>
+            </a>
+            <a href="pantry.html">
+                <div class="category-card">
+                    <img src="Cpantry.jpg" alt="Pantry">
+                    <p>Pantry Staples</p>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -176,6 +190,7 @@
                     <h3>Organic Apples</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-wishlist" onclick="addToWishlist('1', 'Organic Apples', 999)">Add to Wishlist</button>
                 </div>
             </div>
             <div class="product-card" data-id="2">
@@ -184,6 +199,7 @@
                     <h3>Bananas (Organic)</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-wishlist" onclick="addToWishlist('2', 'Bananas (Organic)', 999)">Add to Wishlist</button>
                 </div>
             </div>
             <div class="product-card" data-id="3">
@@ -192,6 +208,7 @@
                     <h3>Fresh Carrots</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-wishlist" onclick="addToWishlist('3', 'Fresh Carrots', 999)">Add to Wishlist</button>
                 </div>
             </div>
             <div class="product-card" data-id="4">
@@ -200,6 +217,7 @@
                     <h3>Organic Spinach</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-wishlist" onclick="addToWishlist('4', 'Organic Spinach', 999)">Add to Wishlist</button>
                 </div>
             </div>
             <div class="product-card" data-id="5">

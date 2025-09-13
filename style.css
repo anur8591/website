@@ -151,20 +151,23 @@ header {
     text-decoration: none;
 }
 
-.cart {
+.cart, a.cart {
     display: flex;
     align-items: center;
     border: 1px solid transparent;
     border-radius: 4px;
+    color: white;
+    text-decoration: none;
 }
 
-.cart:hover {
+.cart:hover, a.cart:hover {
     border: 1px solid white;
 }
 
-.cart i {
+.cart i, a.cart i {
     font-size: 28px;
     margin-right: 5px;
+    color: white;
 }
 
 .cart-count {
@@ -183,6 +186,7 @@ header {
     font-size: 14px;
     font-weight: bold;
     margin-left: 3px;
+    color: white;
 }
 
 /* Bottom Navigation */
@@ -462,19 +466,60 @@ header {
     .hero-banner {
         height: 350px;
     }
-    
+
     .hero-content h1 {
         font-size: 28px;
     }
-    
+
     .hero-content p {
         font-size: 16px;
     }
-    
+
     .hero-button {
         padding: 12px 25px;
         font-size: 16px;
     }
+}
+
+/* Category Banner */
+.category-banner {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.category-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.category-banner-content {
+    position: relative;
+    z-index: 2;
+}
+
+.category-banner-content h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.category-banner-content p {
+    font-size: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* Categories Section */

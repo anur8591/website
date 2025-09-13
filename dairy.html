@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dairy - FreshBasket</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy & Eggs - FreshBasket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -13,7 +13,7 @@
         <div class="navbar">
             <div class="nav-left">
                 <div class="logo-container">
-                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo" /></a>
+                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
                 </div>
                 <div class="location">
                     <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="nav-center">
                 <div class="search-bar">
                     <select class="search-category">
@@ -34,11 +34,11 @@
                         <option>Pantry</option>
                         <option>Beverages</option>
                     </select>
-                    <input type="text" class="search-input" placeholder="Search for groceries..." />
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
                     <button class="search-button"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-
+            
             <div class="nav-right">
                 <div class="account">
                     <a href="login.html" class="account-line1">Hello, Sign in</a>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="nav-bottom">
             <div class="nav-bottom-left">
                 <div class="menu-icon">
@@ -74,62 +74,68 @@
     </header>
 
     <!-- Category Banner -->
-    <section class="category-banner">
+    <section class="category-banner" style="background-image: url('Cdairy.jpg')">
         <div class="category-banner-content">
-            <h1>Fresh Dairy Products</h1>
-            <p>Pure, fresh dairy delivered from local farms</p>
+            <h1>Dairy & Eggs</h1>
+            <p>Fresh dairy products and eggs from local farms</p>
         </div>
     </section>
 
     <!-- Dairy Products -->
     <section class="products">
-        <h2>Dairy & Bakery</h2>
+        <h2>Dairy & Eggs</h2>
         <div class="product-grid">
             <div class="product-card" data-id="5">
-                <img src="https://via.placeholder.com/300x300?text=Whole+Milk" alt="Whole Milk" />
+                <img src="images/dairy/whole_milk.jpg" alt="Whole Milk">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
                 <div class="product-info">
                     <h3>Whole Milk</h3>
+                    <p class="product-price">₹999/L</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="21">
+                <img src="images/dairy/cheese.jpg" alt="Cheese">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
+                <div class="product-info">
+                    <h3>Cheese</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="6">
-                <img src="https://via.placeholder.com/300x300?text=Whole+Wheat+Bread" alt="Whole Wheat Bread" />
+            <div class="product-card" data-id="22">
+                <img src="images/dairy/yogurt.jpg" alt="Yogurt">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
                 <div class="product-info">
-                    <h3>Whole Wheat Bread</h3>
+                    <h3>Yogurt</h3>
                     <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card" data-id="23">
-                <img src="https://via.placeholder.com/300x300?text=Cheese" alt="Cheese" />
+                <img src="images/dairy/eggs.jpg" alt="Eggs">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
                 <div class="product-info">
-                    <h3>Cheddar Cheese</h3>
-                    <p class="product-price">₹1299/kg</p>
+                    <h3>Eggs</h3>
+                    <p class="product-price">₹999/dozen</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card" data-id="24">
-                <img src="https://via.placeholder.com/300x300?text=Yogurt" alt="Yogurt" />
+                <img src="images/dairy/butter.jpg" alt="Butter">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
                 <div class="product-info">
-                    <h3>Greek Yogurt</h3>
-                    <p class="product-price">₹499/pack</p>
+                    <h3>Butter</h3>
+                    <p class="product-price">₹999/kg</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card" data-id="25">
-                <img src="https://via.placeholder.com/300x300?text=Butter" alt="Butter" />
+                <img src="images/dairy/cream.jpg" alt="Cream">
+                <button class="wish-button" aria-label="Add to wishlist">&#9825;</button>
                 <div class="product-info">
-                    <h3>Salted Butter</h3>
-                    <p class="product-price">₹799/kg</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="26">
-                <img src="https://via.placeholder.com/300x300?text=Cream" alt="Cream" />
-                <div class="product-info">
-                    <h3>Fresh Cream</h3>
-                    <p class="product-price">₹699/kg</p>
+                    <h3>Cream</h3>
+                    <p class="product-price">₹999/L</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
@@ -178,7 +184,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-logo">
-                <img src="logo.png" alt="FreshBasket Logo" class="logo" />
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
             </div>
             <div class="copyright">
                 <p>&copy; 2023 FreshBasket. All rights reserved.</p>
