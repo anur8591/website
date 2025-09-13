@@ -18,13 +18,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Smooth horizontal sliding for banner carousel
 let currentBannerIndex = 0;
 let autoRotateInterval;
+let banners, dots;
 
 function initBannerCarousel() {
-    const banners = document.querySelectorAll('.banner-slide');
-    const dots = document.querySelectorAll('.dot');
-    
+    banners = document.querySelectorAll('.banner-slide');
+    dots = document.querySelectorAll('.dot');
+
     if (banners.length === 0) return;
-    
+
     function showBanner(index) {
         banners.forEach((banner, i) => {
             banner.style.transform = `translateX(${(i - index) * 100}%)`;
@@ -34,14 +35,34 @@ function initBannerCarousel() {
             dot.classList.toggle('active', i === index);
         });
     }
-    
+
     function nextBanner() {
         currentBannerIndex = (currentBannerIndex + 1) % banners.length;
         showBanner(currentBannerIndex);
     }
-    
+
     // Auto rotate with smooth sliding
     autoRotateInterval = setInterval(nextBanner, 4000);
+}
+
+function changeBanner(direction) {
+    currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+    showBanner(currentBannerIndex);
+}
+
+function currentBanner(index) {
+    currentBannerIndex = index - 1;
+    showBanner(currentBannerIndex);
+}
+
+function showBanner(index) {
+    banners.forEach((banner, i) => {
+        banner.style.transform = `translateX(${(i - index) * 100}%)`;
+        banner.style.transition = 'transform 0.6s ease-in-out';
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
 }
 
 // Smooth cart functionality
