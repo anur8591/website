@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetables - FreshBasket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <a href="index.html"><img src="logo.png" alt="FreshBasket Logo" class="logo"></a>
+                </div>
+                <div class="location">
+                    <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <div class="location-text">
+                        <span class="deliver-to">Deliver to</span>
+                        <span class="location-name">India</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <select class="search-category">
+                        <option>All</option>
+                        <option>Fruits & Vegetables</option>
+                        <option>Dairy & Bakery</option>
+                        <option>Meat & Seafood</option>
+                        <option>Pantry</option>
+                        <option>Beverages</option>
+                    </select>
+                    <input type="text" class="search-input" placeholder="Search for groceries...">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="account">
+                    <a href="login.html" class="account-line1">Hello, Sign in</a>
+                    <span class="account-line2">Account & Lists</span>
+                </div>
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-text">Cart</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-bottom">
+            <div class="nav-bottom-left">
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                    <span>All Categories</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="#">Deals</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Seasonal Offers</a>
+                    <a href="#">Recipes</a>
+                    <a href="#">My Lists</a>
+                </div>
+            </div>
+            <div class="nav-bottom-right">
+                <a href="#">Free delivery on orders over ₹380+</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Banner -->
+    <section class="category-banner">
+        <div class="category-banner-content">
+            <h1>Fresh Vegetables</h1>
+            <p>Organic, farm-fresh vegetables delivered daily</p>
+        </div>
+    </section>
+
+    <!-- Vegetable Products -->
+    <section class="products">
+        <h2>Vegetables</h2>
+        <div class="product-grid">
+            <div class="product-card" data-id="3">
+                <img src="https://via.placeholder.com/300x300?text=Fresh+Carrots" alt="Fresh Carrots">
+                <div class="product-info">
+                    <h3>Fresh Carrots</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="4">
+                <img src="https://via.placeholder.com/300x300?text=Organic+Spinach" alt="Organic Spinach">
+                <div class="product-info">
+                    <h3>Organic Spinach</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="13">
+                <img src="https://via.placeholder.com/300x300?text=Broccoli" alt="Broccoli">
+                <div class="product-info">
+                    <h3>Broccoli</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="14">
+                <img src="https://via.placeholder.com/300x300?text=Tomatoes" alt="Tomatoes">
+                <div class="product-info">
+                    <h3>Tomatoes</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="15">
+                <img src="https://via.placeholder.com/300x300?text=Cucumbers" alt="Cucumbers">
+                <div class="product-info">
+                    <h3>Cucumbers</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="16">
+                <img src="https://via.placeholder.com/300x300?text=Bell+Peppers" alt="Bell Peppers">
+                <div class="product-info">
+                    <h3>Bell Peppers</h3>
+                    <p class="product-price">₹999/kg</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About FreshBasket</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FreshBasket Cares</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                    <li><a href="#">Manage Devices</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell products on FreshBasket</a></li>
+                    <li><a href="#">Become a Delivery Partner</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Payment Products</h3>
+                <ul>
+                    <li><a href="#">FreshBasket Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">FreshBasket Currency Converter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

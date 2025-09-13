@@ -1,8 +1,4 @@
-# TODO: Add Images to Shop by Category
+# TODO: Create Vegetable Category Page and Link Button
 
-- [x] Update Fruits category image to Cfruits.jpg
-- [x] Update Vegetables category image to Cvegetable.jpg
-- [x] Update Dairy category image to Cdairy.jpg
-- [x] Update Bakery category image to Cbakery.jpg
-- [x] Update Meat category image to Cmeat.jpg
-- [x] Update Pantry category image to Cpantry.jpg
+- [x] Create vegetable.html with basic structure and content
+- [x] Update index.html to link "Shop Vegetables" button to vegetable.html
