@@ -646,6 +646,37 @@ header {
     transform: scale(1.05);
 }
 
+/* Wishlist Heart Button Styles */
+.wish-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.wish-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.wish-button.wished {
+    color: #e74c3c;
+}
+
+.wish-button.wished:hover {
+    color: #c0392b;
+}
+
 /* Weekly Deals */
 .deals {
     padding: 40px 20px;
