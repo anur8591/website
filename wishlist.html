@@ -47,7 +47,6 @@
                 <div class="wishlist">
                     <a href="wishlist.html" style="color: white; text-decoration: none;">
                         <i class="fas fa-heart"></i>
-                        <span class="wishlist-count">0</span>
                         <span class="wishlist-text">Wishlist</span>
                     </a>
                 </div>
@@ -144,7 +143,6 @@
         // Load wishlist items on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadWishlistItems();
-            updateWishlistCount();
         });
 
         function loadWishlistItems() {

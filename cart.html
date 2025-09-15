@@ -87,6 +87,15 @@
         <div id="cart-items" class="cart-items">
             <!-- Cart items will be populated here -->
         </div>
+        <div id="saved-items" class="saved-items" style="display: none;">
+            <h2>Saved for Later</h2>
+            <div id="saved-list"></div>
+        </div>
+        <div class="discount-section">
+            <input type="text" id="discount-code" placeholder="Enter discount code">
+            <button id="apply-discount">Apply</button>
+            <span id="discount-message"></span>
+        </div>
         <div id="cart-total" class="cart-total">
             <!-- Total will be displayed here -->
         </div>
@@ -150,7 +159,18 @@
         // Load cart items on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadCartItems();
+            loadSavedItems();
+
+            // Apply discount
+            document.getElementById('apply-discount').addEventListener('click', applyDiscount);
+
+            // Checkout
+            document.getElementById('checkout-btn').addEventListener('click', function() {
+                alert('Checkout successful! Thank you for shopping.');
+            });
         });
+
+        let discount = 0;
 
         function loadCartItems() {
             const cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -173,7 +193,7 @@
                 const itemElement = document.createElement('div');
                 itemElement.className = 'cart-item';
                 itemElement.innerHTML = `
-                    <img src="https://via.placeholder.com/100x100?text=${item.name.replace(/\s+/g, '+')}" alt="${item.name}">
+                    <img src="${item.image || 'https://via.placeholder.com/100x100?text=' + item.name.replace(/\s+/g, '+')}" alt="${item.name}">
                     <div class="cart-item-info">
                         <h3>${item.name}</h3>
                         <p>Price: ₹${item.price}</p>
@@ -184,12 +204,48 @@
                         </div>
                         <p>Total: ₹${itemTotal}</p>
                         <button onclick="removeFromCart('${id}')" class="remove-btn">Remove</button>
+                        <button onclick="saveForLater('${id}')" class="save-btn">Save for Later</button>
                     </div>
                 `;
                 cartItemsContainer.appendChild(itemElement);
             }
 
+            const discountAmount = total * (discount / 100);
+            const finalTotal = total - discountAmount;
             cartTotalContainer.innerHTML = `<h2>Total: ₹${total}</h2>`;
+            if (discount > 0) {
+                cartTotalContainer.innerHTML += `<p>Discount (${discount}%): -₹${discountAmount.toFixed(2)}</p><h2>Final Total: ₹${finalTotal.toFixed(2)}</h2>`;
+            }
+        }
+
+        function loadSavedItems() {
+            const saved = JSON.parse(localStorage.getItem('saved')) || {};
+            const savedContainer = document.getElementById('saved-items');
+            const savedList = document.getElementById('saved-list');
+
+            savedList.innerHTML = '';
+
+            if (Object.keys(saved).length === 0) {
+                savedContainer.style.display = 'none';
+                return;
+            }
+
+            savedContainer.style.display = 'block';
+
+            for (const [id, item] of Object.entries(saved)) {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'saved-item';
+                itemElement.innerHTML = `
+                    <img src="${item.image || 'https://via.placeholder.com/100x100?text=' + item.name.replace(/\s+/g, '+')}" alt="${item.name}">
+                    <div class="saved-item-info">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price}</p>
+                        <button onclick="moveToCart('${id}')" class="move-btn">Move to Cart</button>
+                        <button onclick="removeSaved('${id}')" class="remove-btn">Remove</button>
+                    </div>
+                `;
+                savedList.appendChild(itemElement);
+            }
         }
 
         function updateQuantity(id, newQuantity) {
@@ -210,6 +266,56 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCartItems();
             updateCartCount();
+        }
+
+        function saveForLater(id) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            const saved = JSON.parse(localStorage.getItem('saved')) || {};
+            if (cart[id]) {
+                saved[id] = cart[id];
+                delete cart[id];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('saved', JSON.stringify(saved));
+                loadCartItems();
+                loadSavedItems();
+                updateCartCount();
+            }
+        }
+
+        function moveToCart(id) {
+            const saved = JSON.parse(localStorage.getItem('saved')) || {};
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            if (saved[id]) {
+                cart[id] = saved[id];
+                delete saved[id];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('saved', JSON.stringify(saved));
+                loadCartItems();
+                loadSavedItems();
+                updateCartCount();
+            }
+        }
+
+        function removeSaved(id) {
+            const saved = JSON.parse(localStorage.getItem('saved')) || {};
+            delete saved[id];
+            localStorage.setItem('saved', JSON.stringify(saved));
+            loadSavedItems();
+        }
+
+        function applyDiscount() {
+            const code = document.getElementById('discount-code').value.toUpperCase();
+            const message = document.getElementById('discount-message');
+            if (code === 'DISCOUNT10') {
+                discount = 10;
+                message.textContent = '10% discount applied!';
+                message.style.color = 'green';
+            } else {
+                discount = 0;
+                message.textContent = 'Invalid code.';
+                message.style.color = 'red';
+            }
+            loadCartItems();
         }
     </script>
 </body>

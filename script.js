@@ -212,15 +212,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth add to cart animation
+    // Smooth add to cart animation and functionality
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     addToCartButtons.forEach(button => {
         button.style.transition = 'all 0.3s ease';
         button.addEventListener('click', function() {
+            // Animation
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
             }, 150);
+
+            // Add to cart functionality
+            const productCard = this.closest('.product-card');
+            const productId = productCard.dataset.id;
+            const productName = productCard.querySelector('h3').textContent;
+            const productPriceText = productCard.querySelector('.product-price').textContent;
+            const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, "")) || 0;
+            const productImage = productCard.querySelector('img').src;
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || {};
+            if (cart[productId]) {
+                cart[productId].quantity += 1;
+            } else {
+                cart[productId] = {
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                };
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            Cart.updateCount();
+
+            // Optional: Show feedback
+            alert(`${productName} added to cart!`);
         });
     });
 
