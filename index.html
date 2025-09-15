@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreshBasket - Online Grocery Shopping</title>
+    <title>Daily Basket - Online Grocery Shopping</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,7 @@
         <div class="navbar">
             <div class="nav-left">
                 <div class="logo-container">
-                    <img src="logo.png" alt="FreshBasket Logo" class="logo">
+                    <img src="logo.png" alt="Daily Basket Logo" class="logo">
                 </div>
                 <div class="location">
                     <span class="location-icon"><i class="fas fa-map-marker-alt"></i></span>
@@ -40,9 +40,9 @@
             </div>
             
             <div class="nav-right">
-                <div class="account">
-                    <a href="login.html" class="account-line1">Hello, Sign in</a>
-                    <span class="account-line2">Account & Lists</span>
+                <div class="account" id="account-container">
+                    <a href="#" id="signInLink" class="account-line1">Hello, Sign in</a>
+                    <a href="#" id="accountListsLink" class="account-line2">Account & Lists</a>
                 </div>
                 <div class="wishlist">
                     <a href="wishlist.html" style="color: white; text-decoration: none;">
@@ -61,14 +61,22 @@
         
         <div class="nav-bottom">
             <div class="nav-bottom-left">
-                <div class="menu-icon">
-                    <i class="fas fa-bars"></i>
+                <div class="menu-icon hamburger-menu" aria-label="Toggle menu" role="button" tabindex="0">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                     <span>All Categories</span>
                 </div>
-                <div class="nav-links">
-                    <a href="wishlist.html">Wishlist</a>
-                    <a href="#">New Arrivals</a>
-                    <a href="#">Seasonal Offers</a>
+                <div class="category-dropdown">
+                    <a href="index.html">Home</a>
+                    <a href="fruits.html">Fruits</a>
+                    <a href="vegetable.html">Vegetables</a>
+                    <a href="dairy.html">Dairy</a>
+                    <a href="bakery.html">Bakery</a>
+                    <a href="meat.html">Meat</a>
+                    <a href="pantry.html">Pantry</a>
+                    <a href="cloths.html">Cloths</a>
+                    <a href="stationery.html">Stationery</a>
                 </div>
             </div>
             <div class="nav-bottom-right">
@@ -76,6 +84,53 @@
             </div>
         </div>
     </header>
+
+    <div id="login-popup" class="login-popup" style="display:none;">
+        <div class="login-popup-content">
+            <span id="closeLoginPopup" class="close">&times;</span>
+            <div class="auth-tabs">
+                <button id="loginTab" class="auth-tab active">Sign In</button>
+                <button id="signupTab" class="auth-tab">Sign Up</button>
+            </div>
+            <form id="loginForm" class="login-form">
+                <h2>Sign in to Daily Basket</h2>
+                <div class="form-group">
+                    <label for="popupEmail">Email</label>
+                    <input type="email" id="popupEmail" name="popupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="popupPassword">Password</label>
+                    <input type="password" id="popupPassword" name="popupPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Sign In</button>
+                <p class="login-message" id="popupLoginMessage"></p>
+            </form>
+            <form id="signupForm" class="signup-form" style="display:none;">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="signupName">Your name</label>
+                    <input type="text" id="signupName" name="signupName" placeholder="First and last name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="At least 6 characters" required>
+                    <div class="password-requirements">
+                        <p>Passwords must be at least 6 characters.</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Re-enter password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+                <p class="signup-message" id="popupSignupMessage"></p>
+            </form>
+        </div>
+    </div>
 
     <!-- Moving Banner Section -->
     <section class="moving-banner-container">
@@ -335,10 +390,10 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-logo">
-                <img src="logo.png" alt="FreshBasket Logo" class="logo">
+                <img src="logo.png" alt="Daily Basket Logo" class="logo">
             </div>
             <div class="copyright">
-                <p>&copy; 2023 FreshBasket. All rights reserved.</p>
+                <p>&copy; 2023 Daily Basket. All rights reserved.</p>
             </div>
         </div>
     </footer>

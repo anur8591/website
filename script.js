@@ -1,263 +1,144 @@
-// FreshBasket Grocery Website JavaScript - Smooth and Subtle Animations
-console.log("FreshBasket Grocery Website Loaded");
+// Script to handle login popup display and form submission
 
-// Utils class for utility functions
-class Utils {
-    static updateCartCount() {
-        try {
-            let cart = JSON.parse(localStorage.getItem('cart')) || {};
-            let count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
-            const cartCountElements = document.querySelectorAll('.cart-count');
-            cartCountElements.forEach(element => {
-                element.style.transition = 'all 0.3s ease';
-                element.textContent = count;
-            });
-            return count;
-        } catch (e) {
-            console.error('Error updating cart count:', e);
-            return 0;
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const loginPopup = document.getElementById('login-popup');
+    const signInLink = document.getElementById('signInLink');
+    const accountListsLink = document.getElementById('accountListsLink');
+    const closeLoginPopup = document.getElementById('closeLoginPopup');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const popupLoginMessage = document.getElementById('popupLoginMessage');
+    const popupSignupMessage = document.getElementById('popupSignupMessage');
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+
+    // Function to open login popup
+    function openLoginPopup() {
+        loginPopup.style.display = 'flex';
     }
 
-    static updateWishlistCount() {
-        try {
-            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            const wishlistCountElements = document.querySelectorAll('.wishlist-count');
-            wishlistCountElements.forEach(element => {
-                element.style.transition = 'all 0.3s ease';
-                element.textContent = wishlist.length;
-            });
-            return wishlist.length;
-        } catch (e) {
-            console.error('Error updating wishlist count:', e);
-            return 0;
-        }
+    // Function to close login popup
+    function closePopup() {
+        loginPopup.style.display = 'none';
+        popupLoginMessage.textContent = '';
+        popupSignupMessage.textContent = '';
     }
 
-    static loadWishlist() {
-        try {
-            return JSON.parse(localStorage.getItem('wishlist')) || [];
-        } catch (e) {
-            console.error('Error loading wishlist:', e);
-            return [];
-        }
-    }
+    // Tab switching
+    loginTab.addEventListener('click', () => {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        popupLoginMessage.textContent = '';
+        popupSignupMessage.textContent = '';
+    });
 
-    static saveWishlist(wishlist) {
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    }
-}
+    signupTab.addEventListener('click', () => {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        popupLoginMessage.textContent = '';
+        popupSignupMessage.textContent = '';
+    });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    // Open login popup on clicking sign in or account & lists
+    signInLink.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        openLoginPopup();
+    });
+
+    accountListsLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLoginPopup();
+    });
+
+    // Close popup on clicking close button
+    closeLoginPopup.addEventListener('click', () => {
+        closePopup();
+    });
+
+    // Close popup on clicking outside the popup content
+    loginPopup.addEventListener('click', (e) => {
+        if (e.target === loginPopup) {
+            closePopup();
         }
     });
-});
 
-// Banner class for carousel functionality
-class Banner {
-    constructor() {
-        this.currentIndex = 0;
-        this.autoRotateInterval = null;
-        this.banners = document.querySelectorAll('.banner-slide');
-        this.dots = document.querySelectorAll('.dot');
-    }
+    // Handle login form submission
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('popupEmail').value.trim();
+        const password = document.getElementById('popupPassword').value.trim();
 
-    init() {
-        if (this.banners.length === 0) return;
-
-        this.showBanner(this.currentIndex);
-        this.autoRotateInterval = setInterval(() => this.nextBanner(), 4000);
-    }
-
-    showBanner(index) {
-        this.banners.forEach((banner, i) => {
-            banner.style.transform = `translateX(${(i - index) * 100}%)`;
-            banner.style.transition = 'transform 0.6s ease-in-out';
-        });
-        this.dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-    }
-
-    nextBanner() {
-        this.currentIndex = (this.currentIndex + 1) % this.banners.length;
-        this.showBanner(this.currentIndex);
-    }
-
-    changeBanner(direction) {
-        this.currentIndex = (this.currentIndex + direction + this.banners.length) % this.banners.length;
-        this.showBanner(this.currentIndex);
-    }
-
-    currentBanner(index) {
-        this.currentIndex = index - 1;
-        this.showBanner(this.currentIndex);
-    }
-}
-
-// Global banner instance for HTML onclick
-let bannerInstance;
-
-// Global functions for banner navigation
-function changeBanner(direction) {
-    if (bannerInstance) {
-        bannerInstance.changeBanner(direction);
-    }
-}
-
-function currentBanner(index) {
-    if (bannerInstance) {
-        bannerInstance.currentBanner(index);
-    }
-}
-
-// Cart class for cart functionality
-class Cart {
-    static updateCount() {
-        return Utils.updateCartCount();
-    }
-}
-
-// Wishlist class for wishlist functionality
-class Wishlist {
-    constructor() {
-        this.wishlist = Utils.loadWishlist();
-    }
-
-    toggleWish(productId, button) {
-        const productCard = button.closest('.product-card');
-        const productName = productCard.querySelector('h3').textContent;
-        const productPriceText = productCard.querySelector('.product-price').textContent;
-        const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, "")) || 0;
-        const productImage = productCard.querySelector('img').src;
-
-        const index = this.wishlist.findIndex(item => item.id === productId);
-        if (index === -1) {
-            this.wishlist.push({
-                id: productId,
-                name: productName,
-                price: productPrice,
-                image: productImage
-            });
-            button.innerHTML = '<i class="fas fa-heart"></i>';
-            button.classList.add('wished');
-        } else {
-            this.wishlist.splice(index, 1);
-            button.innerHTML = '<i class="far fa-heart"></i>';
-            button.classList.remove('wished');
+        if (email === '' || password === '') {
+            popupLoginMessage.textContent = 'Please fill in all fields.';
+            popupLoginMessage.style.color = 'red';
+            return;
         }
-        Utils.saveWishlist(this.wishlist);
-        this.updateWishlistCount();
-    }
 
-    initializeWishButtons() {
-        const wishButtons = document.querySelectorAll('.wish-button');
-        wishButtons.forEach(button => {
-            const productCard = button.closest('.product-card');
-            if (!productCard) return;
-            const productId = productCard.dataset.id;
-            if (this.wishlist.some(item => item.id === productId)) {
-                button.innerHTML = '<i class="fas fa-heart"></i>';
-                button.classList.add('wished');
-            } else {
-                button.innerHTML = '<i class="far fa-heart"></i>';
-                button.classList.remove('wished');
-            }
-            button.addEventListener('click', () => {
-                this.toggleWish(productId, button);
-            });
-        });
-    }
+        if (!email.includes('@')) {
+            popupLoginMessage.textContent = 'Please enter a valid email.';
+            popupLoginMessage.style.color = 'red';
+            return;
+        }
 
-    updateWishlistCount() {
-        return Utils.updateWishlistCount();
-    }
-}
+        if (password.length < 6) {
+            popupLoginMessage.textContent = 'Password must be at least 6 characters.';
+            popupLoginMessage.style.color = 'red';
+            return;
+        }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize cart count
-    Cart.updateCount();
+        // Simulate successful login
+        popupLoginMessage.textContent = 'Login successful! Redirecting...';
+        popupLoginMessage.style.color = '#4CAF50';
 
-    // Initialize wishlist count
-    Utils.updateWishlistCount();
-
-    // Initialize banner carousel
-    bannerInstance = new Banner();
-    bannerInstance.init();
-
-    // Initialize wish buttons
-    const wishlist = new Wishlist();
-    wishlist.initializeWishButtons();
-
-    // Smooth hover effects for product cards
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach(card => {
-        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-            this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
-        });
+        setTimeout(() => {
+            closePopup();
+            window.location.href = 'index.html';
+        }, 1500);
     });
 
-    // Smooth add to cart animation and functionality
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.style.transition = 'all 0.3s ease';
-        button.addEventListener('click', function() {
-            // Animation
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
+    // Handle signup form submission
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Add to cart functionality
-            const productCard = this.closest('.product-card');
-            const productId = productCard.dataset.id;
-            const productName = productCard.querySelector('h3').textContent;
-            const productPriceText = productCard.querySelector('.product-price').textContent;
-            const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, "")) || 0;
-            const productImage = productCard.querySelector('img').src;
+        if (!name || !email || !password || !confirmPassword) {
+            popupSignupMessage.textContent = 'Please fill in all fields.';
+            popupSignupMessage.style.color = 'red';
+            return;
+        }
 
-            let cart = JSON.parse(localStorage.getItem('cart')) || {};
-            if (cart[productId]) {
-                cart[productId].quantity += 1;
-            } else {
-                cart[productId] = {
-                    id: productId,
-                    name: productName,
-                    price: productPrice,
-                    image: productImage,
-                    quantity: 1
-                };
-            }
-            localStorage.setItem('cart', JSON.stringify(cart));
-            Cart.updateCount();
+        if (!email.includes('@')) {
+            popupSignupMessage.textContent = 'Please enter a valid email.';
+            popupSignupMessage.style.color = 'red';
+            return;
+        }
 
-            // Optional: Show feedback
-            alert(`${productName} added to cart!`);
-        });
+        if (password.length < 6) {
+            popupSignupMessage.textContent = 'Password must be at least 6 characters.';
+            popupSignupMessage.style.color = 'red';
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            popupSignupMessage.textContent = 'Passwords do not match.';
+            popupSignupMessage.style.color = 'red';
+            return;
+        }
+
+        // Simulate successful signup
+        popupSignupMessage.textContent = 'Account created successfully! Redirecting to login...';
+        popupSignupMessage.style.color = '#4CAF50';
+
+        setTimeout(() => {
+            closePopup();
+            window.location.href = 'login.html';
+        }, 2000);
     });
-
-    // Smooth mobile menu
-    const menuIcon = document.querySelector('.menu-icon');
-    const navLinks = document.querySelector('.nav-links');
-    if (menuIcon && navLinks) {
-        menuIcon.addEventListener('click', function() {
-            navLinks.style.transition = 'transform 0.3s ease';
-            navLinks.classList.toggle('show');
-        });
-    }
 });
