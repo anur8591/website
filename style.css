@@ -71,6 +71,10 @@ header {
 .nav-center {
     flex: 3;
     margin: 0 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1001; /* Ensure dropdown appears above other elements */
 }
 
 .search-bar {
@@ -297,6 +301,8 @@ header {
 .category-dropdown a:last-child {
     border-bottom: none;
 }
+
+
 
 .nav-links {
     display: flex;
@@ -652,6 +658,28 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     background-color: #f0f4f1;
+}
+
+.filter-container {
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.filter-container label {
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 10px;
+    color: #2c7744;
+}
+
+.filter-container select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .products h2 {

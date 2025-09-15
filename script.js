@@ -141,4 +141,23 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'login.html';
         }, 2000);
     });
+
+    // Category dropdown toggle for bottom nav
+    const menuIcon = document.querySelector('.menu-icon');
+    const categoryDropdown = document.querySelector('.category-dropdown');
+
+    if (menuIcon && categoryDropdown) {
+        menuIcon.addEventListener('click', () => {
+            categoryDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuIcon.contains(e.target) && !categoryDropdown.contains(e.target)) {
+                categoryDropdown.classList.remove('show');
+            }
+        });
+    }
+
+
 });

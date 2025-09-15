@@ -60,25 +60,25 @@
         </div>
         
         <div class="nav-bottom">
-            <div class="nav-bottom-left">
-                <div class="menu-icon hamburger-menu" aria-label="Toggle menu" role="button" tabindex="0">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span>All Categories</span>
-                </div>
-                <div class="category-dropdown">
-                    <a href="index.html">Home</a>
-                    <a href="fruits.html">Fruits</a>
-                    <a href="vegetable.html">Vegetables</a>
-                    <a href="dairy.html">Dairy</a>
-                    <a href="bakery.html">Bakery</a>
-                    <a href="meat.html">Meat</a>
-                    <a href="pantry.html">Pantry</a>
-                    <a href="cloths.html">Cloths</a>
-                    <a href="stationery.html">Stationery</a>
-                </div>
+        <div class="nav-bottom-left">
+            <div class="menu-icon hamburger-menu" aria-label="Toggle menu" role="button" tabindex="0">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span>All Categories</span>
             </div>
+            <div class="category-dropdown">
+                <a href="index.html">All Categories</a>
+                <a href="fruits.html">Fruits</a>
+                <a href="vegetable.html">Vegetables</a>
+                <a href="dairy.html">Dairy</a>
+                <a href="bakery.html">Bakery</a>
+                <a href="meat.html">Meat</a>
+                <a href="pantry.html">Pantry</a>
+                <a href="cloths.html">Cloths</a>
+                <a href="stationery.html">Stationery</a>
+            </div>
+        </div>
             <div class="nav-bottom-right">
                 <a href="#">Free delivery on orders over ₹380+</a>
             </div>
@@ -241,6 +241,18 @@
     <!-- Featured Products -->
     <section class="products">
         <h2>Featured Products</h2>
+        <div class="filter-container">
+            <label for="category-filter">Filter by Category:</label>
+            <select id="category-filter">
+                <option value="all">All Categories</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Meat">Meat</option>
+                <option value="Seafood">Seafood</option>
+            </select>
+        </div>
         <div class="product-grid">
             <div class="product-card" data-id="1">
                 <img src="Fapple.jpg" alt="Organic Apples">
@@ -398,6 +410,40 @@
         </div>
     </footer>
 
+    <script>
+        // Product data with categories
+        const products = {
+            1: { name: "Organic Apples", category: "Fruits" },
+            2: { name: "Bananas (Organic)", category: "Fruits" },
+            3: { name: "Fresh Carrots", category: "Vegetables" },
+            4: { name: "Organic Spinach", category: "Vegetables" },
+            5: { name: "Whole Milk", category: "Dairy" },
+            6: { name: "Whole Wheat Bread", category: "Bakery" },
+            7: { name: "Chicken Breast", category: "Meat" },
+            8: { name: "Atlantic Salmon", category: "Seafood" }
+        };
+
+        // Category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilter = document.getElementById('category-filter');
+            const productCards = document.querySelectorAll('.product-card');
+
+            categoryFilter.addEventListener('change', function() {
+                const selectedCategory = this.value;
+
+                productCards.forEach(card => {
+                    const productId = card.getAttribute('data-id');
+                    const product = products[productId];
+
+                    if (selectedCategory === 'all' || product.category === selectedCategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
