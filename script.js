@@ -159,5 +159,131 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Cart functionality
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || {};
+    }
 
+    function saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const cart = getCart();
+        let totalQuantity = 0;
+        for (const item of Object.values(cart)) {
+            totalQuantity += item.quantity;
+        }
+        const cartCountElem = document.querySelector('.cart-count');
+        if (cartCountElem) {
+            cartCountElem.textContent = totalQuantity;
+        }
+    }
+
+    // Wishlist functionality
+    function getWishlist() {
+        return JSON.parse(localStorage.getItem('wishlist')) || [];
+    }
+
+    function saveWishlist(wishlist) {
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+
+    function updateWishlistCount() {
+        const wishlist = getWishlist();
+        const wishlistCountElem = document.querySelector('.wishlist-count');
+        if (wishlistCountElem) {
+            wishlistCountElem.textContent = wishlist.length;
+        }
+    }
+
+    // Initialize wishlist states on page load
+    const wishlist = getWishlist();
+    const wishButtons = document.querySelectorAll('.wish-button');
+
+    wishButtons.forEach(button => {
+        const productCard = button.closest('.product-card');
+        const productId = productCard ? productCard.getAttribute('data-id') : null;
+        if (productId && wishlist.some(item => item.id == productId)) {
+            button.classList.add('wished');
+            const icon = button.querySelector('i');
+            if (icon) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            }
+        }
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!productId) return;
+
+            const icon = button.querySelector('i');
+            const img = productCard.querySelector('img');
+            const name = productCard.querySelector('h3').textContent;
+            const priceText = productCard.querySelector('.product-price').textContent;
+            const price = parseFloat(priceText.replace('₹', ''));
+            const image = img ? img.src : '';
+
+            let currentWishlist = getWishlist();
+            const existingIndex = currentWishlist.findIndex(item => item.id == productId);
+
+            if (button.classList.contains('wished')) {
+                // Remove from wishlist
+                button.classList.remove('wished');
+                if (icon) {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                }
+                if (existingIndex > -1) {
+                    currentWishlist.splice(existingIndex, 1);
+                }
+            } else {
+                // Add to wishlist
+                button.classList.add('wished');
+                if (icon) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                }
+                if (existingIndex === -1) {
+                    currentWishlist.push({ id: productId, name, price, image });
+                }
+            }
+
+            saveWishlist(currentWishlist);
+            updateWishlistCount();
+        });
+    });
+
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const productId = productCard ? productCard.getAttribute('data-id') : null;
+            if (!productId) return;
+
+            const img = productCard.querySelector('img');
+            const name = productCard.querySelector('h3').textContent;
+            const priceText = productCard.querySelector('.product-price').textContent;
+            const price = parseFloat(priceText.replace('₹', ''));
+            const image = img ? img.src : '';
+
+            let cart = getCart();
+            if (cart[productId]) {
+                cart[productId].quantity += 1;
+            } else {
+                cart[productId] = { name, price, quantity: 1, image };
+            }
+
+            saveCart(cart);
+            updateCartCount();
+            alert('Item added to cart!');
+        });
+    });
+
+    // Update counts on load
+    updateCartCount();
+    updateWishlistCount();
 });
