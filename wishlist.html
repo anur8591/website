@@ -44,6 +44,13 @@
                     <a href="login.html" class="account-line1">Hello, Sign in</a>
                     <span class="account-line2">Account & Lists</span>
                 </div>
+                <div class="wishlist">
+                    <a href="wishlist.html" style="color: white; text-decoration: none;">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                        <span class="wishlist-text">Wishlist</span>
+                    </a>
+                </div>
                 <div class="cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -137,6 +144,7 @@
         // Load wishlist items on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadWishlistItems();
+            updateWishlistCount();
         });
 
         function loadWishlistItems() {
@@ -154,13 +162,13 @@
                 const itemElement = document.createElement('div');
                 itemElement.className = 'wishlist-item';
                 itemElement.innerHTML = `
-                    <img src="https://via.placeholder.com/100x100?text=${item.name.replace(/\s+/g, '+')}" alt="${item.name}">
+                    <img src="${item.image}" alt="${item.name}">
                     <div class="wishlist-item-info">
                         <h3>${item.name}</h3>
                         <p>Price: ₹${item.price}</p>
                         <div class="wishlist-actions">
-                            <button onclick="addToCartFromWishlist(${index})" class="add-to-cart-btn">Add to Cart</button>
-                            <button onclick="removeFromWishlist(${index})" class="remove-btn">Remove</button>
+                            <button onclick="addToCartFromWishlist(${index})" class="add-to-cart-btn styled-button">Add to Cart</button>
+                            <button onclick="removeFromWishlist(${index})" class="remove-btn styled-button remove-button">Remove</button>
                         </div>
                     </div>
                 `;
@@ -192,6 +200,17 @@
             wishlist.splice(index, 1);
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             loadWishlistItems();
+            updateWishlistCount();
+        }
+
+        function updateWishlistCount() {
+            try {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                document.querySelector('.wishlist-count').textContent = wishlist.length;
+            } catch (e) {
+                console.error('Error updating wishlist count:', e);
+                document.querySelector('.wishlist-count').textContent = '0';
+            }
         }
     </script>
 </body>

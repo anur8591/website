@@ -33,6 +33,13 @@
             </div>
             
             <div class="nav-right">
+                <div class="wishlist">
+                    <a href="wishlist.html" style="color: white; text-decoration: none;">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                        <span class="wishlist-text">Wishlist</span>
+                    </a>
+                </div>
                 <div class="cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -61,6 +68,7 @@
             </div>
             <p id="product-description"></p>
             <p class="product-price" id="product-price"></p>
+            <button class="wish-button"><i class="far fa-heart"></i></button>
             <div class="product-meta">
                 <p><strong>Category:</strong> <span id="product-category"></span></p>
                 <p><strong>Origin:</strong> <span id="product-origin"></span></p>
@@ -354,6 +362,67 @@
                         alert('Error adding to cart. Please try again.');
                     }
                 }
+            });
+        });
+    </script>
+    <script>
+        // Wishlist toggle for product detail page
+        document.addEventListener('DOMContentLoaded', function() {
+            const wishButton = document.querySelector('.wish-button');
+            if (!wishButton) return;
+
+            // Load wishlist from localStorage or empty array
+            let wishlist = [];
+            try {
+                wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            } catch (e) {
+                console.error('Error loading wishlist:', e);
+            }
+
+            // Get product ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || '1';
+
+            // Get product details from products object
+            const product = products[productId];
+
+            // Function to check if product is in wishlist
+            function isInWishlist(id) {
+                return wishlist.some(item => item.id === id);
+            }
+
+            // Update heart icon based on wishlist state
+            function updateHeartIcon() {
+                if (isInWishlist(productId)) {
+                    wishButton.innerHTML = '<i class="fas fa-heart"></i>';
+                    wishButton.classList.add('wished');
+                } else {
+                    wishButton.innerHTML = '<i class="far fa-heart"></i>';
+                    wishButton.classList.remove('wished');
+                }
+            }
+
+            updateHeartIcon();
+
+            // Toggle wishlist on heart button click
+            wishButton.addEventListener('click', () => {
+                if (!product) return;
+
+                if (isInWishlist(productId)) {
+                    // Remove from wishlist
+                    wishlist = wishlist.filter(item => item.id !== productId);
+                } else {
+                    // Add to wishlist
+                    wishlist.push({
+                        id: productId,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image
+                    });
+                }
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                updateHeartIcon();
+                updateWishlistCount();
             });
         });
     </script>

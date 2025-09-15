@@ -151,26 +151,27 @@ header {
     text-decoration: none;
 }
 
-.cart, a.cart {
+.wishlist, .cart, a.cart {
     display: flex;
     align-items: center;
     border: 1px solid transparent;
     border-radius: 4px;
     color: white;
     text-decoration: none;
+    margin: 0 5px;
 }
 
-.cart:hover, a.cart:hover {
+.wishlist:hover, .cart:hover, a.cart:hover {
     border: 1px solid white;
 }
 
-.cart i, a.cart i {
+.wishlist i, .cart i, a.cart i {
     font-size: 28px;
     margin-right: 5px;
     color: white;
 }
 
-.cart-count {
+.wishlist-count, .cart-count {
     background-color: #ff9900;
     color: #111;
     font-weight: bold;
@@ -182,7 +183,7 @@ header {
     left: -8px;
 }
 
-.cart-text {
+.wishlist-text, .cart-text {
     font-size: 14px;
     font-weight: bold;
     margin-left: 3px;
@@ -775,6 +776,108 @@ header {
     text-align: center;
 }
 
+
+/* Wishlist Styles */
+.wishlist-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.wishlist-section h1 {
+    text-align: center;
+    color: #2c7744;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.wishlist-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.wishlist-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.wishlist-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.wishlist-item-info {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-item-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.wishlist-item-info p {
+    color: #2c7744;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.wishlist-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.styled-button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.add-to-cart-btn {
+    background-color: #ffd814;
+    color: #111;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #f7ca00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.remove-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.remove-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 /* Footer Styles */
 footer {

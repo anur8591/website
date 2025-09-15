@@ -19,6 +19,21 @@ class Utils {
         }
     }
 
+    static updateWishlistCount() {
+        try {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const wishlistCountElements = document.querySelectorAll('.wishlist-count');
+            wishlistCountElements.forEach(element => {
+                element.style.transition = 'all 0.3s ease';
+                element.textContent = wishlist.length;
+            });
+            return wishlist.length;
+        } catch (e) {
+            console.error('Error updating wishlist count:', e);
+            return 0;
+        }
+    }
+
     static loadWishlist() {
         try {
             return JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -119,9 +134,20 @@ class Wishlist {
     }
 
     toggleWish(productId, button) {
-        const index = this.wishlist.indexOf(productId);
+        const productCard = button.closest('.product-card');
+        const productName = productCard.querySelector('h3').textContent;
+        const productPriceText = productCard.querySelector('.product-price').textContent;
+        const productPrice = parseFloat(productPriceText.replace(/[^0-9.-]+/g, "")) || 0;
+        const productImage = productCard.querySelector('img').src;
+
+        const index = this.wishlist.findIndex(item => item.id === productId);
         if (index === -1) {
-            this.wishlist.push(productId);
+            this.wishlist.push({
+                id: productId,
+                name: productName,
+                price: productPrice,
+                image: productImage
+            });
             button.innerHTML = '<i class="fas fa-heart"></i>';
             button.classList.add('wished');
         } else {
@@ -130,6 +156,7 @@ class Wishlist {
             button.classList.remove('wished');
         }
         Utils.saveWishlist(this.wishlist);
+        this.updateWishlistCount();
     }
 
     initializeWishButtons() {
@@ -138,7 +165,7 @@ class Wishlist {
             const productCard = button.closest('.product-card');
             if (!productCard) return;
             const productId = productCard.dataset.id;
-            if (this.wishlist.includes(productId)) {
+            if (this.wishlist.some(item => item.id === productId)) {
                 button.innerHTML = '<i class="fas fa-heart"></i>';
                 button.classList.add('wished');
             } else {
@@ -147,22 +174,21 @@ class Wishlist {
             }
             button.addEventListener('click', () => {
                 this.toggleWish(productId, button);
-                this.updateWishlistCount();
             });
         });
     }
 
     updateWishlistCount() {
-        const countElements = document.querySelectorAll('.wishlist-count');
-        countElements.forEach(el => {
-            el.textContent = this.wishlist.length;
-        });
+        return Utils.updateWishlistCount();
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize cart count
     Cart.updateCount();
+
+    // Initialize wishlist count
+    Utils.updateWishlistCount();
 
     // Initialize banner carousel
     bannerInstance = new Banner();

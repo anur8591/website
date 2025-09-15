@@ -1,7 +1,4 @@
-# TODO: Add Images to Featured Products
-
-- [x] Replace placeholder image for Organic Spinach with Fspinach.jpg
-- [x] Replace placeholder image for Whole Milk with FWhole Milk.jpg
-- [x] Replace placeholder image for Whole Wheat Bread with Fwhole-wheat-bread.jpg
-- [x] Replace placeholder image for Chicken Breast with FChicken Breast.jpg
-- [x] Replace placeholder image for Atlantic Salmon with FAtlantic Salmon.jpg
+- [x] Add heart button (wish-button) to product.html in the product-info section
+- [x] Add JavaScript in product.html to initialize and handle heart button click using Wishlist logic
+- [x] Ensure heart button state reflects current wishlist status
+- [x] Test the functionality by adding/removing product from wishlist via heart button
