@@ -314,6 +314,20 @@
         // Update cart count when page loads
         updateCartCount();
 
+        // Update wishlist count in header
+        function updateWishlistCount() {
+            try {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                document.querySelector('.wishlist-count').textContent = wishlist.length;
+            } catch (e) {
+                console.error('Error updating wishlist count:', e);
+                document.querySelector('.wishlist-count').textContent = '0';
+            }
+        }
+
+        // Update wishlist count when page loads
+        updateWishlistCount();
+
         // Add to cart functionality for related products
         document.querySelectorAll('.related-products .add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
