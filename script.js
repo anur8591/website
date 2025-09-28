@@ -120,8 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (password.length < 6) {
-            popupSignupMessage.textContent = 'Password must be at least 6 characters.';
+        // Password validation: max 8 characters, at least 1 uppercase, 1 digit, 1 special char
+        const uppercaseRegex = /[A-Z]/;
+        const digitRegex = /\d/;
+        const specialRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+        if (password.length > 8 || !uppercaseRegex.test(password) || !digitRegex.test(password) || !specialRegex.test(password)) {
+            popupSignupMessage.textContent = 'Password must have at most 8 characters and include at least 1 capital letter, 1 number, and 1 special character.';
             popupSignupMessage.style.color = 'red';
             return;
         }

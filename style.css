@@ -1041,7 +1041,7 @@ footer {
 .login-container {
     max-width: 400px;
     position: absolute;
-    top: 50%;
+    top: calc(50% + 80px);
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
@@ -1049,6 +1049,7 @@ footer {
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 1002;
 }
 
 /* Login Popup Styles */
@@ -1059,7 +1060,7 @@ footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1002;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1074,6 +1075,7 @@ footer {
     width: 90%;
     position: relative;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 1003;
 }
 
 .auth-tabs {
@@ -1741,9 +1743,7 @@ footer {
     background-color: #3a7a3a;
 }
 
-.add-to-cart-btn {
-    /* Additional styles if needed */
-}
+
 
 .remove-button,
 .remove-btn {
@@ -1988,16 +1988,4 @@ footer {
   position: relative;
 }
 
-.banner-track {
-  display: flex;
-  width: 400%; /* since 4 slides */
-  height: 100%;
-  transition: transform 0.8s ease-in-out;
-}
 
-.banner-slide {
-  min-width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}

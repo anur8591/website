@@ -37,8 +37,24 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-if (strlen($password) < 6) {
-    echo json_encode(['error' => 'Password must be at least 6 characters']);
+// Password validation: max 8 characters, at least 1 uppercase, 1 digit, 1 special char
+if (strlen($password) > 8) {
+    echo json_encode(['error' => 'Password must have at most 8 characters']);
+    exit;
+}
+
+if (!preg_match('/[A-Z]/', $password)) {
+    echo json_encode(['error' => 'Password must include at least 1 capital letter']);
+    exit;
+}
+
+if (!preg_match('/\d/', $password)) {
+    echo json_encode(['error' => 'Password must include at least 1 number']);
+    exit;
+}
+
+if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+    echo json_encode(['error' => 'Password must include at least 1 special character']);
     exit;
 }
 
