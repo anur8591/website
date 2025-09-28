@@ -390,19 +390,11 @@ header {
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.6s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateX(100%);
-}
-
-.banner-slide.active {
-    transform: translateX(0);
-}
-
-.banner-slide.prev {
-    transform: translateX(-100%);
+    opacity: 0;
 }
 
 .banner-slide.active {
@@ -1979,4 +1971,33 @@ footer {
     font-weight: bold;
     color: #ffd814;
     border-bottom: 2px solid #ffd814;
+}
+
+/* New Banner Carousel Styles */
+.hero-banner {
+  width: 100%;
+  height: 400px; /* adjust as needed */
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-carousel {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-track {
+  display: flex;
+  width: 400%; /* since 4 slides */
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+}
+
+.banner-slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }

@@ -286,4 +286,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update counts on load
     updateCartCount();
     updateWishlistCount();
+
+    // Banner Carousel Functionality
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots = document.querySelectorAll('.dot');
+    let autoSlideInterval;
+
+    function showSlides(n) {
+        slideIndex = (n + slides.length) % slides.length; // Handle looping with modulo
+
+        // Update slides opacity via active class
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[slideIndex].classList.add('active');
+
+        // Update dots
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[slideIndex].classList.add('active');
+    }
+
+    function changeBanner(n) {
+        clearInterval(autoSlideInterval);
+        showSlides(slideIndex + n);
+        autoSlideInterval = setInterval(() => changeBanner(1), 5000);
+    }
+
+    function currentBanner(n) {
+        clearInterval(autoSlideInterval);
+        showSlides(n - 1);
+        autoSlideInterval = setInterval(() => changeBanner(1), 5000);
+    }
+
+    // Auto-advance slides every 5 seconds
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => changeBanner(1), 5000);
+    }
+
+    // Initialize the first slide
+    showSlides(slideIndex);
+    startAutoSlide();
 });
