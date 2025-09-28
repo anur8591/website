@@ -317,9 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
         autoSlideInterval = setInterval(() => changeBanner(1), 5000);
     }
 
-    // Auto-advance slides every 5 seconds
+    // Auto-advance slides every 3 seconds
     function startAutoSlide() {
-        autoSlideInterval = setInterval(() => changeBanner(1), 5000);
+        autoSlideInterval = setInterval(() => changeBanner(1), 3000);
     }
 
     // Initialize the first slide
